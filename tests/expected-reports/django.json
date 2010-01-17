@@ -1,0 +1,53 @@
+[
+    {
+        "client_version": "{{ver}}", 
+        "data": {
+            "G_boz": "biz", 
+            "G_foo": "bar"
+        }, 
+        "env": {
+            "HTTP_ACCEPT_ENCODING": "identity", 
+            "HTTP_CONNECTION": "close", 
+            "HTTP_HOST": "localhost:8236", 
+            "HTTP_USER_AGENT": "Python-urllib/2.5", 
+            "PATH_INFO": "/polls/1/vote/", 
+            "QUERY_STRING": "foo=bar&boz=biz", 
+            "REMOTE_ADDR": "127.0.0.1", 
+            "REMOTE_HOST": "", 
+            "SERVER_NAME": "retester.example.com", 
+            "SERVER_PORT": "8236", 
+            "SERVER_PROTOCOL": "HTTP/1.1", 
+            "SERVER_SOFTWARE": "WSGIServer/0.1 Python/2.5.1", 
+            "cpu_arch": "32bit", 
+            "cpu_type": "i386", 
+            "os_kernel_name": "Darwin", 
+            "os_kernel_version": "9.8.0", 
+            "python_version": "2.5.1"
+        }, 
+        "exceptions": [
+            {
+                "locations": [
+                    {
+                        "claimed": true, 
+                        "file": "/Users/andreyvit/Projects/feedback/python-client/crashkit_django/polls/views.py", 
+                        "line": 21, 
+                        "method": "vote", 
+                        "package": "crashkit_django.polls.views"
+                    }, 
+                    {
+                        "claimed": false, 
+                        "class": "WSGIHandler", 
+                        "file": "/Library/Python/2.5/site-packages/django/core/handlers/base.py", 
+                        "line": 86, 
+                        "method": "get_response", 
+                        "package": "django.core.handlers.base"
+                    }
+                ], 
+                "message": "integer division or modulo by zero", 
+                "name": "ZeroDivisionError"
+            }
+        ], 
+        "language": "python", 
+        "role": "customer"
+    }
+]

@@ -1,0 +1,104 @@
+[
+    {
+        "client_version": "{{ver}}", 
+        "data": [], 
+        "env": {
+            "php_version": "5.2.10"
+        }, 
+        "exceptions": [
+            {
+                "locations": [
+                    {
+                        "class": null, 
+                        "file": "crashkit-demo-included.php", 
+                        "function": null, 
+                        "line": 33
+                    }, 
+                    {
+                        "class": null, 
+                        "file": "crashkit-demo.php", 
+                        "function": "include", 
+                        "line": 15
+                    }
+                ], 
+                "message": "Use of undefined constant I_AM_NOT_DEFINED - assumed 'I_AM_NOT_DEFINED'", 
+                "name": "Notice"
+            }
+        ], 
+        "language": "php", 
+        "role": "customer", 
+        "severity": "normal"
+    }, 
+    {
+        "client_version": "{{ver}}", 
+        "data": [], 
+        "env": {
+            "php_version": "5.2.10"
+        }, 
+        "exceptions": [
+            {
+                "locations": [
+                    {
+                        "class": null, 
+                        "file": "crashkit-demo-included.php", 
+                        "function": "trigger_error", 
+                        "line": 19
+                    }, 
+                    {
+                        "class": null, 
+                        "file": "crashkit-demo-included.php", 
+                        "function": "distance", 
+                        "line": 41
+                    }, 
+                    {
+                        "class": null, 
+                        "file": "crashkit-demo.php", 
+                        "function": "include", 
+                        "line": 15
+                    }
+                ], 
+                "message": "Coordinate 2 in vector 1 is not a number, using zero", 
+                "name": "User Warning"
+            }
+        ], 
+        "language": "php", 
+        "role": "customer", 
+        "severity": "normal"
+    }, 
+    {
+        "client_version": "{{ver}}", 
+        "data": [], 
+        "env": {
+            "php_version": "5.2.10"
+        }, 
+        "exceptions": [
+            {
+                "locations": [
+                    {
+                        "class": null, 
+                        "file": "crashkit-demo-included.php", 
+                        "function": "trigger_error", 
+                        "line": 10
+                    }, 
+                    {
+                        "class": null, 
+                        "file": "crashkit-demo-included.php", 
+                        "function": "distance", 
+                        "line": 44
+                    }, 
+                    {
+                        "class": null, 
+                        "file": "crashkit-demo.php", 
+                        "function": "include", 
+                        "line": 15
+                    }
+                ], 
+                "message": "Vectors need to be of the same size", 
+                "name": "User Error"
+            }
+        ], 
+        "language": "php", 
+        "role": "customer", 
+        "severity": "major"
+    }
+]

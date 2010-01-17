@@ -1,0 +1,120 @@
+[
+    {
+        "client_version": "1.2.0.3", 
+        "data": {}, 
+        "env": {
+            "cpu_arch": "32bit", 
+            "cpu_type": "i386", 
+            "os_kernel_name": "Darwin", 
+            "os_kernel_version": "9.8.0", 
+            "python_version": "2.5.1"
+        }, 
+        "exceptions": [
+            {
+                "locations": [
+                    {
+                        "claimed": false, 
+                        "file": "/System/Library/Frameworks/Python.framework/Versions/2.5/lib/python2.5/re.py", 
+                        "line": 233, 
+                        "method": "_compile", 
+                        "package": "re"
+                    }, 
+                    {
+                        "claimed": false, 
+                        "file": "/System/Library/Frameworks/Python.framework/Versions/2.5/lib/python2.5/re.py", 
+                        "line": 129, 
+                        "method": "match", 
+                        "package": "re"
+                    }, 
+                    {
+                        "claimed": true, 
+                        "class": "Boo", 
+                        "file": "/Users/andreyvit/Projects/crashkit/python-client/sample.py", 
+                        "line": 30, 
+                        "method": "ku", 
+                        "package": "__main__"
+                    }, 
+                    {
+                        "claimed": true, 
+                        "class": "Boo", 
+                        "file": "/Users/andreyvit/Projects/crashkit/python-client/sample.py", 
+                        "line": 22, 
+                        "method": "zoo", 
+                        "package": "__main__"
+                    }, 
+                    {
+                        "claimed": true, 
+                        "file": "/Users/andreyvit/Projects/crashkit/python-client/sample.py", 
+                        "line": 25, 
+                        "method": "poo", 
+                        "package": "__main__"
+                    }, 
+                    {
+                        "claimed": true, 
+                        "file": "/Users/andreyvit/Projects/crashkit/python-client/sample.py", 
+                        "line": 36, 
+                        "method": "smoo", 
+                        "package": "__main__"
+                    }, 
+                    {
+                        "claimed": true, 
+                        "class": "Boo", 
+                        "file": "/Users/andreyvit/Projects/crashkit/python-client/sample.py", 
+                        "line": 40, 
+                        "method": "cmoo", 
+                        "package": "__main__"
+                    }, 
+                    {
+                        "claimed": true, 
+                        "class": "Moo", 
+                        "file": "/Users/andreyvit/Projects/crashkit/python-client/sample.py", 
+                        "line": 51, 
+                        "method": "moo", 
+                        "package": "__main__"
+                    }, 
+                    {
+                        "claimed": true, 
+                        "class": "Moo", 
+                        "file": "/Users/andreyvit/Projects/crashkit/python-client/sample.py", 
+                        "line": 22, 
+                        "method": "zoo", 
+                        "package": "__main__"
+                    }, 
+                    {
+                        "claimed": true, 
+                        "file": "/Users/andreyvit/Projects/crashkit/python-client/sample.py", 
+                        "line": 46, 
+                        "method": "mpoo", 
+                        "package": "__main__"
+                    }, 
+                    {
+                        "claimed": true, 
+                        "file": "/Users/andreyvit/Projects/crashkit/python-client/sample.py", 
+                        "line": 57, 
+                        "method": "smoo", 
+                        "package": "__main__"
+                    }, 
+                    {
+                        "claimed": true, 
+                        "class": "Moo", 
+                        "file": "/Users/andreyvit/Projects/crashkit/python-client/sample.py", 
+                        "line": 61, 
+                        "method": "cmoo", 
+                        "package": "__main__"
+                    }, 
+                    {
+                        "claimed": true, 
+                        "file": "/Users/andreyvit/Projects/crashkit/python-client/sample.py", 
+                        "line": 68, 
+                        "method": "main", 
+                        "package": "__main__"
+                    }
+                ], 
+                "message": "unexpected end of regular expression", 
+                "name": "sre_constants.error"
+            }
+        ], 
+        "language": "python", 
+        "role": "customer"
+    }
+]
