@@ -1,12 +1,12 @@
 // Include this file to use CrashKit for reporting errors in your application.
 // Visit http://crashkitapp.appspot.com/ for details.
-// 
+//
 // Copyright (c) 2009 Andrey Tarantsov, YourSway LLC (http://crashkitapp.appspot.com/)
-// 
+//
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
 // copyright notice and this permission notice appear in all copies.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
 // WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
@@ -51,11 +51,11 @@ var CrashKit = {};
 CrashKit.report = (function() {
     var handlers = [];
     var lastException = null, lastExceptionStack = null;
-    
+
     var subscribe = function(handler) {
         handlers.push(handler);
     };
-    
+
     var notifyHandlers = function(stack) {
         var exception = null;
         for(var i in handlers)
@@ -66,7 +66,7 @@ CrashKit.report = (function() {
             }
         if (exception) { throw exception; }
     };
-    
+
     var onerrorHandler = function(message, url, lineNo) {
         var stack = null;
         if (lastExceptionStack) {
@@ -83,7 +83,7 @@ CrashKit.report = (function() {
         notifyHandlers(stack);
         return false;
     };
-    
+
     var report = function(ex) {
         if (lastExceptionStack) {
             if (lastException == ex) {
@@ -95,7 +95,7 @@ CrashKit.report = (function() {
                 notifyHandlers(s);
             }
         }
-        
+
         var stack = CrashKit.computeStackTrace(ex, 1);
         lastExceptionStack = stack;
         lastException = ex;
@@ -108,21 +108,21 @@ CrashKit.report = (function() {
         }, (stack.incomplete ? 500 : 1));
         throw ex; // re-throw to propagate to the top level (and cause window.onerror)
     };
-    
+
     window.onerror = onerrorHandler;
-    
+
     // jQuery integration (not really tested)
     if(typeof jQuery != 'undefined') {
       // override jQuery.fn.bind to wrap every provided function in try/catch
       var jQueryBind = jQuery.fn.bind;
-      jQuery.fn.bind = function(type, data, fn) { 
+      jQuery.fn.bind = function(type, data, fn) {
           if (!fn && data && typeof data == 'function') {
               fn = data;
               data = null;
           }
           if (fn) {
               var origFn = fn;
-              var wrappedFn = function() { 
+              var wrappedFn = function() {
                   try {
                       return origFn.apply(this, arguments);
                   } catch (ex) {
@@ -134,7 +134,7 @@ CrashKit.report = (function() {
           return jQueryBind.call(this, type, data, fn);
       };
     }
-    
+
     report.subscribe = subscribe;
     return report;
 })();
@@ -194,7 +194,7 @@ CrashKit.report = (function() {
 CrashKit.computeStackTrace = (function() {
     var debug = false;
     var sourceCache = {};
-    
+
     if (typeof XMLHttpRequest == "undefined") {  // IE 5.x-6.x:
         XMLHttpRequest = function() {
             try { return new ActiveXObject("Msxml2.XMLHTTP.6.0"); } catch(e) {}
@@ -216,7 +216,7 @@ CrashKit.computeStackTrace = (function() {
             return "";
         }
     };
-    
+
     var getSource = function(url) {
         if (!(url in sourceCache))
             sourceCache[url] = loadSource(url).split("\n");
@@ -247,7 +247,7 @@ CrashKit.computeStackTrace = (function() {
         return "?";
     };
 
-    var guessFunctionName = function(url, lineNo) {      
+    var guessFunctionName = function(url, lineNo) {
         var source = getSource(url);
         return guessFunctionNameFromLines(lineNo, source);
     };
@@ -264,7 +264,7 @@ CrashKit.computeStackTrace = (function() {
         }
         return (anyDefined ? context : null);
     };
-    
+
     var escapeRegExp = function(text) {
         if (!arguments.callee.sRE) {
             var specials = ['/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\'];
@@ -345,7 +345,7 @@ CrashKit.computeStackTrace = (function() {
             console.info("Function code not found in HTML and all SCRIPTs (please contact CrashKit support):\n" + code);
         return null;
     };
-    
+
     // Contents of Exception in various browsers.
     //
     // WEBKIT:
@@ -368,18 +368,18 @@ CrashKit.computeStackTrace = (function() {
     // INTERNET EXPLORER:
     // ex.message = ...
     // ex.name = ReferenceError
-    // 
+    //
     // OPERA:
     // ex.message = ...message... (see the example below)
     // ex.name = ReferenceError
     // ex.opera#sourceloc = 11  (pretty much useless, duplicates the info in ex.message)
     // ex.stacktrace = n/a; see 'opera:config#UserPrefs|Exceptions Have Stacktrace'
-    
-    
+
+
     var computeStackTraceFromFirefoxStackProp = function(ex) {
         if (!ex.stack)
             return null;
-            
+
         // In Firefox, ex.stack contains a stack trace as a string. Example value is:
         //
         // qqq("hi","hi","hi")@file:///Users/andreyvit/Projects/crashkit/javascript-client/sample.js:7
@@ -387,8 +387,8 @@ CrashKit.computeStackTrace = (function() {
         // ppp("hi","hi","hi")@file:///Users/andreyvit/Projects/crashkit/javascript-client/sample.html#:17
         // ("hi","hi","hi")@file:///Users/andreyvit/Projects/crashkit/javascript-client/sample.html#:12
         // xxx("hi")@file:///Users/andreyvit/Projects/crashkit/javascript-client/sample.html#:8
-        // onclick([object MouseEvent])@file:///Users/andreyvit/Projects/crashkit/javascript-client/sample.html#:1        
-        
+        // onclick([object MouseEvent])@file:///Users/andreyvit/Projects/crashkit/javascript-client/sample.html#:1
+
         var lineRE = /^\s*(?:(\w*)\(.*\))?@((?:file|http).*):(\d+)\s*$/i;
         var lines = ex.stack.split("\n");
         var stack = [];
@@ -407,7 +407,7 @@ CrashKit.computeStackTrace = (function() {
             return null; // ex.stack is defined, but cannot be parsed
         return {'mode': 'firefox', 'name': ex.name, 'message': ex.message, 'stack': stack};
     };
-    
+
     var computeStackTraceFromOperaMultiLineMessage = function(ex) {
         // Opera includes a stack trace into the exception message. An example is:
         //
@@ -419,17 +419,17 @@ CrashKit.computeStackTrace = (function() {
         //           zzz(x, y, z);
         //   Line 3 of inline#1 script in file://localhost/Users/andreyvit/Projects/crashkit/javascript-client/sample.html: In function xxx
         //           yyy(a, a, a);
-        //   Line 1 of function script 
+        //   Line 1 of function script
         //     try { xxx('hi'); return false; } catch(ex) { CrashKit.report(ex); }
         //   ...
         //
         // Note that we don't try to detect Opera because browser detection is evil.
         // Instead, we try to parse any multi-line exception message as Opera stack trace.
-        
+
         var lines = ex.message.split("\n");
         if (lines.length < 4)
             return null;
-            
+
         var lineRE1 = /^\s*Line (\d+) of linked script ((?:file|http)\S+)(?:: in function (\S+))?\s*$/i,
             lineRE2 = /^\s*Line (\d+) of inline#(\d+) script in ((?:file|http)\S+)(?:: in function (\S+))?\s*$/i,
             lineRE3 = /^\s*Line (\d+) of function script\s*$/i;
@@ -483,12 +483,12 @@ CrashKit.computeStackTrace = (function() {
 
         return {'mode': 'opera', 'name': ex.name, 'message': lines[0], 'stack': stack};
     };
-    
+
     var augmentStackTraceWithInitialElement = function(stackInfo, url, lineNo) {
         var initial = {'url': url, 'line': lineNo};
         if (initial.url && initial.line) {
             stackInfo.incomplete = false;
-            
+
             if (!initial.func)
                 initial.func = guessFunctionName(initial.url, initial.line);
             if (!initial.context)
@@ -509,7 +509,7 @@ CrashKit.computeStackTrace = (function() {
             stackInfo.incomplete = true;
         }
     };
-    
+
     var computeStackTraceByWalkingCallerChain = function(ex, depth) {
         var fnRE  = /function\s*([\w\-$]+)?\s*\(/i;
         var stack = [];
@@ -519,7 +519,7 @@ CrashKit.computeStackTrace = (function() {
             var fn = curr.name || '';
             if (!fn)
                 fn = fnRE.test(curr.toString()) ? RegExp.$1 || '' : '';
-            
+
             var source = findSourceByFunctionBody(curr);
             var url = null, line = null;
             if (source) {
@@ -537,34 +537,34 @@ CrashKit.computeStackTrace = (function() {
             stack.push(item);
         }
         stack.splice(0, depth);
-        
+
         var result = {'mode': 'callers', 'name': ex.name, 'message': ex.message, 'stack': stack};
         augmentStackTraceWithInitialElement(result, ex.sourceURL || ex.fileName, ex.line || ex.lineNumber);
         return result;
     };
-    
+
     var computeStackTrace = function(ex, depth) {
         var stack = null;
         depth = (typeof depth == 'undefined' ? 0 : depth-0);
-        
+
         try {
             stack = computeStackTraceFromFirefoxStackProp(ex);
             if (stack) return stack;
         } catch(e) { if(debug) throw e; }
-        
+
         try {
             stack = computeStackTraceFromOperaMultiLineMessage(ex);
             if (stack) return stack;
         } catch(e) { if(debug) throw e; }
-        
+
         try {
             stack = computeStackTraceByWalkingCallerChain(ex, depth + 1);
             if (stack) return stack;
         } catch(e) { if(debug) throw e; }
-        
+
         return { 'mode': 'failed' };
     };
-    
+
     var computeStackTraceOfCaller = function(depth) {
         depth = (typeof depth == 'undefined' ? 0 : depth-0) + 1; // "+ 1" because "ofCaller" should drop one frame
         try {
@@ -573,12 +573,12 @@ CrashKit.computeStackTrace = (function() {
             return computeStackTrace(ex, depth+1);
         }
     };
-    
+
     computeStackTrace.augmentStackTraceWithInitialElement = augmentStackTraceWithInitialElement;
     computeStackTrace.guessFunctionName = guessFunctionName;
     computeStackTrace.gatherContext = gatherContext;
     computeStackTrace.ofCaller = computeStackTraceOfCaller;
-    
+
     return computeStackTrace;
 })();
 
@@ -596,7 +596,7 @@ CrashKit.computeStackTrace = (function() {
             if (src && src.indexOf("crashkit-javascript.js?") >= 0) {
                 crashKitHost = src.substring(src.indexOf("://") + 3);
                 crashKitHost = crashKitHost.substring(0, crashKitHost.indexOf("/"));
-                
+
                 var x = src.substring(src.indexOf("?") + 1).split("/");
                 var proto = (("https:" == document.location.protocol) ? "https://" : "http://");
                 webServiceUrl = proto + crashKitHost + "/" + x[0] + "/products/" + x[1] + "/post-report/0/0";
@@ -672,7 +672,7 @@ CrashKit.computeStackTrace = (function() {
         };
         return encodeJSON;
     }();
-    
+
     var encodeError = function (stack) {
         return encodeJSON([{
             "userActionOrScreenNameOrBackgroundProcess": '',
@@ -701,7 +701,7 @@ CrashKit.computeStackTrace = (function() {
             // oops
         }
     };
-    
+
     var sendToCrashKit = function(stack) {
         if (webServiceUrl == null)
             computeWebServiceUrl();
@@ -712,6 +712,6 @@ CrashKit.computeStackTrace = (function() {
             window.console.info("Error report sent to " + crashKitHost + ":\n" + json);
         sendPayload(json);
     };
-    
+
     CrashKit.report.subscribe(sendToCrashKit);
 })();
