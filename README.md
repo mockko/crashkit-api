@@ -330,10 +330,11 @@ There's a work-in-progress test suite which can be used to make sure all client 
 
 You need pexpect (http://www.noah.org/wiki/Pexpect, http://pexpect.sourceforge.net/pexpect.html):
 
-    wget http://pexpect.sourceforge.net/pexpect-2.3.tar.gz
-    tar xzf pexpect-2.3.tar.gz
-    cd pexpect-2.3
-    sudo python ./setup.py install
+    easy_install pexpect
+
+or
+
+    pip install expect
 
 Run CrashKit development server on port 5005:
 
