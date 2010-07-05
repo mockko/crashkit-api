@@ -42,8 +42,8 @@ This way it is easy to drop a file into your project and easy to update it after
 JSON API
 --------
 
-The API will become stable in February 2010. At that points, the URLs will change to include
-API version numbers. This section documents the current API.
+The API will become stable in future. At that points, the URLs will
+change to include API version numbers. This section documents the current API.
 
 The API is constantly evolving. See [API-related tickets](https://yoursway.lighthouseapp.com/projects/27411-crashkit/tickets?q=tagged%3Aapi+state%3Aopen) in our bug tracker.
 
